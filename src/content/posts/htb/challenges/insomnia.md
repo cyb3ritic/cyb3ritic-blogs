@@ -2,7 +2,7 @@
 title: Insomnia
 published: 2024-08-05
 description: Writeup for an easy labeled HTB Web challenge named Insomnia.
-image: ./insomnia/Insomnia_pwned.jpg
+image: ./insomnia/insomnia_theme.gif
 tags: [HackTheBox, Linux, Challenges]
 category: Writeups
 draft: false
@@ -10,18 +10,16 @@ draft: false
 
 # <center>Insomnia</center>
 -  easy web challenge
-
-![insomnia theme](./insomnia/insomnia_theme.gif)
 <hr>
 
-Hello everyone, This id the writeup for Insomnia, an easy labeled web challenege. So, let's together solve this challenge.
+Hello everyone, This is the writeup for Insomnia, an easy labeled web challenege. So, let's solve this challenge together.
 
-First let's start the instande and download the necessary files. Now we can accesws the page in ouu browser. the first thing I wanted was to check the source page, so I inspected the wep page.
+First let's start the instance and download the necessary files. Now we can access the page in our browser. The first thing I wanted was to check the source page, so I inspected the wep page.
 ![inspecting insomnia](./insomnia/inspecting_insomnia.jpg)
 
-- we can see three active clickable links, home signin and signup.
+- we can see three active clickable links, home, signin and signup.
 
-Now let' go deeper and see the downloaded files. There scanning manually through all the file, I reached to app/Controllers directory. There i found something interesting.
+Now let's go deeper and see the downloaded files. There scanning manually through all the file, I reached to app/Controllers directory. There i found something interesting.
 
 1. In app/Controllers/ProfileControllers.php, we see that we can get flag if we are authenticated as administrator. Else we will just get a welcome message on our page.
 ```php
@@ -60,6 +58,7 @@ class ProfileController extends BaseController
         }
     }
 }
+<?
 ```
 
 So my plan was to create a test account and then modify the payload cookie with name parameter as administrator. But I cannot by pass the jwt request since it is being decoded with a 32 bit Hex randblob key. So, need to think a different method.
@@ -83,4 +82,6 @@ So What i did next was I reloggedin to carlos account and after intercepting the
 ![flag](./insomnia/result.jpg)
 
 Thankyou for reading this writeup. I hope it was interesting and informative. See you soon :)
+
+![insomnia pwned](./insomnia/insomnia_pwned.jpg)
     
