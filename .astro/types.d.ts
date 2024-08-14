@@ -175,6 +175,13 @@ declare module 'astro:content' {
   collection: "posts";
   data: InferEntrySchema<"posts">
 } & { render(): Render[".md"] };
+"htb/machines/lame.md": {
+	id: "htb/machines/lame.md";
+  slug: "htb/machines/lame";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".md"] };
 };
 "spec": {
 "about.md": {
