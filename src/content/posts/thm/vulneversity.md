@@ -1,10 +1,10 @@
 ---
 title: Vulnversity
 published: 2024-08-22
-description: Writeup for an easy labeled THM Room named Vulnversity.
+description: Walkthrough for an easy labeled THM Room named Vulnversity.
 image: ./vulnversity/vulnversity_logo.png
 tags: [TryHackMe, Linux, Room]
-category: Writeups
+category: Walkthrough
 draft: false
 ---
 

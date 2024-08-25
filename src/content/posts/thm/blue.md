@@ -1,10 +1,10 @@
 ---
 title: Blue
 published: 2024-08-25
-description: Writeup for an easy labeled THM Room named Blue.
+description: Walkthrough for an easy labeled THM Room named Blue.
 image: ./blue/blue_logo.gif
 tags: [TryHackMe, Windows, Room]
-category: Writeups
+category: Walkthrough
 draft: false
 ---
 
