@@ -2,7 +2,7 @@
 title: 2million
 published: 2024-08-05
 description: Writeup for an easy labeled linux based HTB machine named 2million.
-image: https://raw.githubusercontent.com/cyb3ritic/images/refs/heads/master/htb/machines/2million/2million_pwned.png
+image: https://raw.githubusercontent.com/cyb3ritic/images/refs/heads/master/htb/machines/2million/2million_info.png
 tags: [HackTheBox, Linux, Machines]
 category: Writeups
 draft: false
