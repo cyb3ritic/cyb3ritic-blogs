@@ -2,7 +2,7 @@
 title: Lame
 published: 2024-08-14
 description: Writeup for an easy labeled linux based HTB machine named Lame.
-image: https://raw.githubusercontent.com/cyb3ritic/images/refs/heads/master/htb/machines/lame/lame_pwned.png
+image: https://raw.githubusercontent.com/cyb3ritic/images/refs/heads/master/htb/machines/lame/lame_info.png
 tags: [HackTheBox, Linux, Machines]
 category: Writeups
 draft: false
