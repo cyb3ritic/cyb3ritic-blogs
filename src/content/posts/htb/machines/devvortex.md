@@ -2,7 +2,7 @@
 title: Devvortex
 published: 2024-08-05
 description: Writeup for an easy labeled linux based HTB machine named Devvortex.
-image: https://raw.githubusercontent.com/cyb3ritic/images/refs/heads/master/htb/machines/devvortex/devvortex_pwned.jpg
+image: https://raw.githubusercontent.com/cyb3ritic/images/refs/heads/master/htb/machines/devvortex/devvortex_info.png
 tags: [HackTheBox, Linux, Machines]
 category: Writeups
 draft: false
