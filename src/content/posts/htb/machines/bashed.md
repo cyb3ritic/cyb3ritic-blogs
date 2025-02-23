@@ -2,7 +2,7 @@
 title: Bashed
 published: 2025-01-19
 description: Writeup for an easy labeled linux based HTB machine named Bashed.
-image: https://raw.githubusercontent.com/cyb3ritic/images/refs/heads/master/htb/machines/bashed/bashed_pwned.png
+image: https://raw.githubusercontent.com/cyb3ritic/images/refs/heads/master/htb/machines/bashed/bashed_info.png
 tags: [HackTheBox, Linux, Machines]
 category: Writeups
 draft: false
