@@ -2,7 +2,7 @@
 title: Busqueda
 published: 2024-08-06
 description: Writeup for an easy labeled linux based HTB machine named Busqueda.
-image: https://raw.githubusercontent.com/cyb3ritic/images/refs/heads/master/htb/machines/busqueda/busqueda_pwned.png
+image: https://raw.githubusercontent.com/cyb3ritic/images/refs/heads/master/htb/machines/busqueda/busqueda_info.png
 tags: [HackTheBox, Linux, Machines]
 category: Writeups
 draft: false
