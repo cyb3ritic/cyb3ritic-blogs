@@ -5,7 +5,7 @@ description: Template for writeup
 image: https://media.giphy.com/media/YQitE4YNQNahy/giphy.gif
 tags: [HackTheBox, TryHackMe, Template]
 category: Template
-draft: false
+draft: True
 ---
 
 
