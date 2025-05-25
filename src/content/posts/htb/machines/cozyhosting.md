@@ -9,9 +9,6 @@ draft: false
 ---
 
 # <center> Cozyhosting </center>
-<p align="center"> 
-    <img src="https://raw.githubusercontent.com/cyb3ritic/images/refs/heads/master/htb/machines/cozyhosting/cozyhosting_info.png">
-</p>
 
 Hello Hackerrrrrs. How y all doin' ? Welcome to my new walkthrough in a new linux based easy labeled htb box `cozyhosting`.
 

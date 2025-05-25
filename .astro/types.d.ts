@@ -131,77 +131,105 @@ declare module 'astro:content' {
   slug: "htb/challenges/insomnia";
   body: string;
   collection: "posts";
-  data: InferEntrySchema<"posts">
+  data: any
 } & { render(): Render[".md"] };
 "htb/machines/2million.md": {
 	id: "htb/machines/2million.md";
   slug: "htb/machines/2million";
   body: string;
   collection: "posts";
-  data: InferEntrySchema<"posts">
+  data: any
+} & { render(): Render[".md"] };
+"htb/machines/bashed.md": {
+	id: "htb/machines/bashed.md";
+  slug: "htb/machines/bashed";
+  body: string;
+  collection: "posts";
+  data: any
 } & { render(): Render[".md"] };
 "htb/machines/bizness.md": {
 	id: "htb/machines/bizness.md";
   slug: "htb/machines/bizness";
   body: string;
   collection: "posts";
-  data: InferEntrySchema<"posts">
+  data: any
 } & { render(): Render[".md"] };
 "htb/machines/busqueda.md": {
 	id: "htb/machines/busqueda.md";
   slug: "htb/machines/busqueda";
   body: string;
   collection: "posts";
-  data: InferEntrySchema<"posts">
+  data: any
+} & { render(): Render[".md"] };
+"htb/machines/cozyhosting.md": {
+	id: "htb/machines/cozyhosting.md";
+  slug: "htb/machines/cozyhosting";
+  body: string;
+  collection: "posts";
+  data: any
 } & { render(): Render[".md"] };
 "htb/machines/devvortex.md": {
 	id: "htb/machines/devvortex.md";
   slug: "htb/machines/devvortex";
   body: string;
   collection: "posts";
-  data: InferEntrySchema<"posts">
+  data: any
 } & { render(): Render[".md"] };
 "htb/machines/editorial.md": {
 	id: "htb/machines/editorial.md";
   slug: "htb/machines/editorial";
   body: string;
   collection: "posts";
-  data: InferEntrySchema<"posts">
+  data: any
 } & { render(): Render[".md"] };
 "htb/machines/headless.md": {
 	id: "htb/machines/headless.md";
   slug: "htb/machines/headless";
   body: string;
   collection: "posts";
-  data: InferEntrySchema<"posts">
+  data: any
+} & { render(): Render[".md"] };
+"htb/machines/htb_writeup_template.md": {
+	id: "htb/machines/htb_writeup_template.md";
+  slug: "htb/machines/htb_writeup_template";
+  body: string;
+  collection: "posts";
+  data: any
 } & { render(): Render[".md"] };
 "htb/machines/lame.md": {
 	id: "htb/machines/lame.md";
   slug: "htb/machines/lame";
   body: string;
   collection: "posts";
-  data: InferEntrySchema<"posts">
+  data: any
+} & { render(): Render[".md"] };
+"htb/machines/nibbles.md": {
+	id: "htb/machines/nibbles.md";
+  slug: "htb/machines/nibbles";
+  body: string;
+  collection: "posts";
+  data: any
 } & { render(): Render[".md"] };
 "thm/blue.md": {
 	id: "thm/blue.md";
   slug: "thm/blue";
   body: string;
   collection: "posts";
-  data: InferEntrySchema<"posts">
+  data: any
 } & { render(): Render[".md"] };
 "thm/kenobi.md": {
 	id: "thm/kenobi.md";
   slug: "thm/kenobi";
   body: string;
   collection: "posts";
-  data: InferEntrySchema<"posts">
+  data: any
 } & { render(): Render[".md"] };
 "thm/vulneversity.md": {
 	id: "thm/vulneversity.md";
   slug: "thm/vulneversity";
   body: string;
   collection: "posts";
-  data: InferEntrySchema<"posts">
+  data: any
 } & { render(): Render[".md"] };
 };
 "spec": {
@@ -222,5 +250,5 @@ declare module 'astro:content' {
 
 	type AnyEntryMap = ContentEntryMap & DataEntryMap;
 
-	export type ContentConfig = typeof import("./../src/content/config.js");
+	export type ContentConfig = never;
 }
