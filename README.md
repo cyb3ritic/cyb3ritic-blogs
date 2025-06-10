@@ -154,9 +154,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ### Connect with Me
 
 - 🌐 **Blog**: [blog.samipshah.com.np](https://blog.samipshah.com.np)
-- 💼 **LinkedIn**: [Your LinkedIn Profile]
+- 💼 **LinkedIn**: [@cyb3ritic](https://linkedin.com/in/cyb3ritic)
 - 🐙 **GitHub**: [@cyb3ritic](https://github.com/cyb3ritic)
-- 🐦 **Twitter**: [Your Twitter Handle]
 
 ---
 
